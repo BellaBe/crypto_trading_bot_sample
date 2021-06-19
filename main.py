@@ -1,4 +1,5 @@
 import logging
+from config import *
 
 from connectors.bitmex import BitmexClient
 from connectors.binance import BinanceClient
@@ -25,13 +26,13 @@ logger.addHandler(file_handler)
 
 if __name__ == "__main__":
     binance = BinanceClient(
-        "55764814ef910b9e9a76f5336e8e4c096605f4195167504850a53660d1c1f56c",
-        "3edd31374e7f615dd854e3d018b328aeccbbb8487a8b4cd24bdaf3c7a98f5bc2",
+        BINANCE_SPOT_KEY,
+        BINANCE_SPOT_SECRET,
         True, False)
 
     bitmex = BitmexClient(
-        "4JdbvKsTvSaD1J7iyQ1J37GL",
-        "RS1IG_5CgBJrmLtA3q2HH83U-gViENv155JDAe5nIq4_retT",
+        BITMEX_KEY,
+        BINANCE_SPOT_SECRET,
         True
     )
 

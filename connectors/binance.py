@@ -27,6 +27,7 @@ class BinanceClient:
 
         """
         https://binance-docs.github.io/apidocs/futures/en
+        https://binance-docs.github.io/apidocs/spot/en/#change-log
         :param public_key:
         :param secret_key:
         :param testnet:

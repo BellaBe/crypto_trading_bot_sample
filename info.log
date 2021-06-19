@@ -2134,3 +2134,20 @@
 2021-06-19 16:58:37,047 INFO :: Bitmex websocket connection opened
 2021-06-19 16:58:37,316 INFO :: Binance connection opened
 2021-06-19 16:58:37,317 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2021-06-19 17:39:40,666 DEBUG :: Starting new HTTPS connection (1): testnet.binance.vision:443
+2021-06-19 17:39:41,108 DEBUG :: https://testnet.binance.vision:443 "GET /api/v3/exchangeInfo HTTP/1.1" 200 1084
+2021-06-19 17:39:41,111 DEBUG :: Starting new HTTPS connection (1): testnet.binance.vision:443
+2021-06-19 17:39:41,488 DEBUG :: https://testnet.binance.vision:443 "GET /api/v3/account?timestamp=1624120781111&signature=063c43a1a738850d03c5426ef4b7f1a6614162717aea1b200e1bd0dd4042a9d3 HTTP/1.1" 401 70
+2021-06-19 17:39:41,488 ERROR :: Error while making GET request to /api/v3/account: {'code': -2015, 'msg': 'Invalid API-key, IP, or permissions for action.'} (error code 401)
+2021-06-19 17:39:41,490 INFO :: Binance Futures Client successfully initialized
+2021-06-19 17:39:41,492 DEBUG :: Starting new HTTPS connection (1): testnet.bitmex.com:443
+2021-06-19 17:39:41,793 DEBUG :: https://testnet.bitmex.com:443 "GET /api/v1/instrument/active HTTP/1.1" 200 None
+2021-06-19 17:39:41,806 DEBUG :: Starting new HTTPS connection (1): testnet.bitmex.com:443
+2021-06-19 17:39:42,127 DEBUG :: https://testnet.bitmex.com:443 "GET /api/v1/user/margin?currency=all HTTP/1.1" 200 None
+2021-06-19 17:39:42,129 INFO :: Bitmex Client successfully initialized
+2021-06-19 17:39:42,467 INFO :: Bitmex websocket connection opened
+2021-06-19 17:39:42,527 INFO :: Binance connection opened
+2021-06-19 17:39:42,527 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2021-06-19 17:39:58,847 INFO :: Binance: subscribing to: xrpbusd@bookTicker
+2021-06-19 17:39:58,849 DEBUG :: Starting new HTTPS connection (1): testnet.binance.vision:443
+2021-06-19 17:39:59,238 DEBUG :: https://testnet.binance.vision:443 "GET /api/v3/ticker/bookTicker?symbol=XRPBUSD HTTP/1.1" 200 112
