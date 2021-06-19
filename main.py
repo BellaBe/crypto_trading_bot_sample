@@ -28,12 +28,13 @@ if __name__ == "__main__":
     binance = BinanceClient(
         BINANCE_SPOT_KEY,
         BINANCE_SPOT_SECRET,
-        True, False)
+        testnet=True,
+        futures=False)
 
     bitmex = BitmexClient(
         BITMEX_KEY,
         BINANCE_SPOT_SECRET,
-        True
+        testnet=True
     )
 
 

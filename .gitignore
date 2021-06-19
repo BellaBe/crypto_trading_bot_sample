@@ -5,6 +5,7 @@ venv/
 config.py
 database.db
 env.txt
+*.log
 
 .idea/**/workspace.xml
 .idea/**/tasks.xml
