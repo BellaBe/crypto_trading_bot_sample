@@ -1,12 +1,12 @@
 import tkinter as tk
 import typing
 
-from models import *
+from models.models import *
 
 from interface.styling import *
 from interface.autocomplete_widget import Autocomplete
 from interface.scrollable_frame import ScrollableFrame
-from database import WorkspaceData
+from db.database import WorkspaceData
 
 
 class WatchList(tk.Frame):
@@ -33,12 +33,12 @@ class WatchList(tk.Frame):
         self._binance_label.grid(row=0, column=0)
 
         self._binance_entry = Autocomplete(self.binance_symbols,
-                                       self._commands_frame,
-                                       fg=FG_COLOR,
-                                       justify=tk.CENTER,
-                                       insertbackground=FG_COLOR,
-                                       bg=BG_COLOR_2
-                                       )
+                                           self._commands_frame,
+                                           fg=FG_COLOR,
+                                           justify=tk.CENTER,
+                                           insertbackground=FG_COLOR,
+                                           bg=BG_COLOR_2
+                                           )
         self._binance_entry.bind("<Return>", self._add_binance_symbol)
         self._binance_entry.grid(row=1, column=0)
 
@@ -51,12 +51,12 @@ class WatchList(tk.Frame):
         self._bitmex_label.grid(row=0, column=1)
 
         self._bitmex_entry = Autocomplete(self.bitmex_symbols,
-                                      self._commands_frame,
-                                      fg=FG_COLOR,
-                                      justify=tk.CENTER,
-                                      insertbackground=FG_COLOR,
-                                      bg=BG_COLOR_2
-                                      )
+                                          self._commands_frame,
+                                          fg=FG_COLOR,
+                                          justify=tk.CENTER,
+                                          insertbackground=FG_COLOR,
+                                          bg=BG_COLOR_2
+                                          )
         self._bitmex_entry.bind("<Return>", self._add_bitmex_symbol)
         self._bitmex_entry.grid(row=1, column=1)
 
@@ -85,7 +85,6 @@ class WatchList(tk.Frame):
         self._body_frame.pack(side=tk.TOP, fill=tk.X, anchor="nw")
 
         for h in self._headers:
-            print("HEADER", h)
             self.body_widgets[h] = dict()
             if h in ["bid", "ask"]:
                 self.body_widgets[h + "_var"] = dict()
@@ -95,7 +94,6 @@ class WatchList(tk.Frame):
 
         for s in saved_symbols:
             self._add_symbol(s["symbol"], s["exchange"])
-
 
     def _remove_symbol(self, b_index: int):
 
@@ -162,4 +160,3 @@ class WatchList(tk.Frame):
         self.body_widgets["remove"][b_index].grid(row=b_index, column=4)
 
         self._body_index += 1
-

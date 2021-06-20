@@ -1,6 +1,7 @@
 import tkinter as tk
 import typing
 
+
 class Autocomplete(tk.Entry):
     def __init__(self, symbols: typing.List[str], *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -69,8 +70,3 @@ class Autocomplete(tk.Entry):
             self._lb.destroy()
             self._lb_open = False
             self.icursor(tk.END)
-
-
-
-
-

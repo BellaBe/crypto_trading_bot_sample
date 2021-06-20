@@ -14,10 +14,9 @@ import json
 
 import threading
 
-from models import *
+from models.models import *
 
-from strategies import TechnicalStrategy, BreakoutStrategy
-
+from strategies.strategies import TechnicalStrategy, BreakoutStrategy
 
 logger = logging.getLogger()
 
@@ -75,7 +74,7 @@ class BinanceClient:
         t = threading.Thread(target=self._start_ws)
         t.start()
 
-        logger.info("Binance Futures Client successfully initialized")
+        logger.info(f"Binance {'Futures' if self.futures else 'Spot'} Client successfully initialized")
 
     def _add_log(self, msg: str):
 
@@ -111,6 +110,7 @@ class BinanceClient:
         if method == "GET":
             try:
                 response = requests.get(self._base_url + endpoint, params=data, headers=self._headers)
+
             except Exception as e:  # Takes into account any possible error, most likely network errors
                 logger.error("Connection error while making %s request to %s: %s", method, endpoint, e)
                 return None
@@ -239,7 +239,8 @@ class BinanceClient:
 
         return balances
 
-    def place_order(self, contract: Contract, order_type: str, quantity: float, side: str, price=None, tif=None) -> OrderStatus:
+    def place_order(self, contract: Contract, order_type: str, quantity: float, side: str, price=None,
+                    tif=None) -> OrderStatus:
 
         """
         Place an order. Based on the order_type, the price and tif arguments are not required
@@ -372,8 +373,11 @@ class BinanceClient:
         :return:
         """
 
-        self.ws = websocket.WebSocketApp(self._wss_url, on_open=self._on_open, on_close=self._on_close,
-                                         on_error=self._on_error, on_message=self._on_message)
+        self.ws = websocket.WebSocketApp(self._wss_url,
+                                         on_open=self._on_open,
+                                         on_close=self._on_close,
+                                         on_error=self._on_error,
+                                         on_message=self._on_message)
 
         while True:
             try:
@@ -422,7 +426,7 @@ class BinanceClient:
     def _on_message(self, ws, msg: str):
 
         """
-        The websocket updates of the channels the program subscribed to will go through this callback method
+        The websockets updates of the channels the program subscribed to will go through this callback method
         :param msg:
         :return:
         """
@@ -431,7 +435,8 @@ class BinanceClient:
 
         if "u" in data and "A" in data:
             data['e'] = "bookTicker"  # For Binance Spot, to make the data structure uniform with Binance Futures
-            # See the data structure difference here: https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams
+            # See the data structure difference here:
+            # https://binance-docs.github.io/apidocs/spot/en/#individual-symbol-book-ticker-streams
 
         if "e" in data:
             if data['e'] == "bookTicker":
@@ -503,7 +508,7 @@ class BinanceClient:
             self.ws.send(json.dumps(data))  # Converts the JSON object (dictionary) to a JSON string
             logger.info("Binance: subscribing to: %s", ','.join(data['params']))
         except Exception as e:
-            logger.error("Websocket error while subscribing to @bookTicker and @aggTrade: %s", e)
+            logger.error("Websockets error while subscribing to @bookTicker and @aggTrade: %s", e)
 
         self._ws_id += 1
 
@@ -540,12 +545,3 @@ class BinanceClient:
         logger.info("Binance current %s balance = %s, trade size = %s", contract.quote_asset, balance, trade_size)
 
         return trade_size
-
-
-
-
-
-
-
-
-

@@ -1,10 +1,9 @@
 import datetime
 import tkinter as tk
-import typing
 
 from interface.styling import *
 from interface.scrollable_frame import ScrollableFrame
-from models import Trade
+from models.models import Trade
 
 
 class TradeWatch(tk.Frame):
@@ -41,12 +40,12 @@ class TradeWatch(tk.Frame):
             header.grid(row=0, column=idx)
 
         header = tk.Label(self._headers_frame,
-                              text="",
-                              bg=BG_COLOR,
-                              fg=FG_COLOR,
-                              font=GLOBAL_FONT,
-                              width=2
-                              )
+                          text="",
+                          bg=BG_COLOR,
+                          fg=FG_COLOR,
+                          font=GLOBAL_FONT,
+                          width=2
+                          )
         header.grid(row=0, column=len(self._headers))
 
         self._headers_frame.pack(side=tk.TOP, anchor="nw")
@@ -57,8 +56,6 @@ class TradeWatch(tk.Frame):
             self.body_widgets[h] = dict()
             if h in ["status", "pnl"]:
                 self.body_widgets[h + "_var"] = dict()
-
-
 
         self._body_index = 0
 

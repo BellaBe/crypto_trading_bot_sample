@@ -1,13 +1,12 @@
 import tkinter as tk
-import typing
 
-from database import WorkspaceData
+from db.database import WorkspaceData
 from interface.styling import *
 from interface.scrollable_frame import ScrollableFrame
 from connectors.bitmex import *
 from connectors.binance import *
-from strategies import TechnicalStrategy, BreakoutStrategy
-from utils import *
+from strategies.strategies import TechnicalStrategy, BreakoutStrategy
+from utils.utils import *
 
 
 class StrategyEditor(tk.Frame):
@@ -147,10 +146,12 @@ class StrategyEditor(tk.Frame):
                                                                  width=base_param["width"])
 
                 if base_param["data_type"] == int:
-                    self.body_widgets[code_name][b_index].config(validate="key", validatecommand=(self._valid_integer, "%P"))
+                    self.body_widgets[code_name][b_index].config(validate="key",
+                                                                 validatecommand=(self._valid_integer, "%P"))
 
                 elif base_param["data_type"] == float:
-                    self.body_widgets[code_name][b_index].config(validate="key", validatecommand=(self._valid_float, "%P"))
+                    self.body_widgets[code_name][b_index].config(validate="key",
+                                                                 validatecommand=(self._valid_float, "%P"))
 
             elif base_param["widget"] == tk.Button:
                 self.body_widgets[code_name][b_index] = tk.Button(self._body_frame.sub_frame,
@@ -177,8 +178,6 @@ class StrategyEditor(tk.Frame):
     def _show_popup(self, b_index: int):
         x = self.body_widgets["parameters"][b_index].winfo_rootx()
         y = self.body_widgets["parameters"][b_index].winfo_rooty()
-        print("X", x)
-        print("Y", y)
 
         self._popup_window = tk.Toplevel(self)
         self._popup_window.wm_title("Parameters")
@@ -291,8 +290,6 @@ class StrategyEditor(tk.Frame):
                 self._exchanges[exchange].subscribe_channel([contract], "aggTrade")
                 self._exchanges[exchange].subscribe_channel([contract], "bookTicker")
 
-
-
             self._exchanges[exchange].strategies[b_index] = new_strategy
 
             for param in self._base_params:
@@ -315,7 +312,6 @@ class StrategyEditor(tk.Frame):
             self.body_widgets[element["code_name"]][b_index].grid_forget()
             del self.body_widgets[element["code_name"]][b_index]
 
-
     def _load_workspace(self):
         data = self.db.get("strategies")
 
@@ -336,8 +332,3 @@ class StrategyEditor(tk.Frame):
             for param, value in extra_params.items():
                 if value is not None:
                     self.additional_parameters[b_index][param] = value
-
-
-
-
-
