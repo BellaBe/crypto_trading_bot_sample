@@ -129,7 +129,7 @@ class Root(tk.Tk):
         except RuntimeError as e:
             logger.error("Error while looping through watchlist dictionary: %s", e)
 
-        # tradewatch
+        # trade watch
         self.after(1500, self._update_ui)
 
     def _ask_before_close(self):
